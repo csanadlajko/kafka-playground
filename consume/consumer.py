@@ -39,7 +39,7 @@ class KafkaConsumer:
         self.consumer.assign(topic_partitions)
         msg: Message = self.consumer.poll(1.0)
         return {
-            "timestamp": msg.timestamp(),
+            "timestamp": msg.timestamp()[1], ## epoch on index 1
             "value": msg.value().decode(),
             "topic_name": msg.topic(),
             "headers": msg.headers(),
